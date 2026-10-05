@@ -2,319 +2,247 @@ import java.util.Scanner;
 
 public class App {
     public static void main(String[] args) throws Exception {
-
-        int opcao = 0;
         Scanner scan = new Scanner(System.in);
         Sistema sistema = new Sistema();
         App.popular(sistema);
         boolean finalizarVotacao = false;
-
+        System.out.println("Inicializando sistemas...");
+        System.out.println("Sistema inicializado com sucesso!");
+        System.out.println("-----------------------------------");
+        System.out.println("URNA ELETRÔNICA - JUSTIÇA ELEITORAL");
+        System.out.println("-----------------------------------");
+        System.out.println("Versão 1.0.2");
+        System.out.println("-----------------------------------");
         do {
-            System.out.println("= URNA ELETRÔNICA - JUSTIÇA ELEITORAL =");
-            System.out.println("---------------------------------------");
-            System.out.println("Escolha uma opção: ");
-            System.out.println("[1] - Cadastrar candidato");
-            System.out.println("[2] - Iniciar votação");
-            System.out.println("[0] - Desligar urna");
+            int num = 0;
+            Candidato cand = null;
+            boolean confirma = false;
+            int confirmar = 0;
+            do {
+                System.out.println("DEPUTADO FEDERAL");
+                System.out.println("[0] - Voto nulo");
+                System.out.println("[1] - Voto em branco");
+                System.out.println("Digite o número do candidato [][][][]: ");
+                num = scan.nextInt();
+                if (num != 0 && num != 1) {
+                    if (sistema.buscarCandidato(num, "DeputadoFederal") != null) {
+                        cand = sistema.buscarCandidato(num,"DeputadoFederal");
+                        System.out.println("---------------------------------------");
+                        System.out.println(cand.toString());
+                        System.out.println("---------------------------------------");
+                        System.out.println("[1] - Confirmar");
+                        System.out.println("[2] - Limpar");
+                        confirmar = scan.nextInt();
+                        if (confirmar == 1) {
+                            confirma = cand.adicionarVoto();
+                            System.out.println("PLIM!");
 
-            try {
-                opcao = Integer.parseInt(scan.next());
-            } catch (NumberFormatException e) {
-                System.out.print("Valor inválido. Digite um número. ");
-                opcao = Integer.parseInt(scan.next());
-            }
-
-            switch (opcao) {
-                case 1:
-                    try {
-                        String vice = null;
-                        System.out.println("Digite o nome do candidato: ");
-                        String nome = scan.next();
-                        System.out.println("Digite o cargo do candidato: ");
-                        String cargo = scan.next();
-                        System.out.println("Digite o partido do candidato: ");
-                        String partido = scan.next();
-                        System.out.println("Digite o número do candidato: ");
-                        int numero = Integer.parseInt(scan.next());
-
-                        if (cargo.equalsIgnoreCase("Presidente")) {
-                            System.out.println("Digite o vice do candidato: ");
-                            vice = scan.next();
-                            Candidato c1 = new Presidente(nome, cargo, partido, numero, vice);
-                            sistema.cadastrarCandidato(c1);
-                        } else if (cargo.equalsIgnoreCase("Governador")){
-                            System.out.println("Digite o vice do candidato: ");
-                            vice = scan.next();
-                            Candidato c1 = new Governador(nome, cargo, partido, numero, vice);
-                            sistema.cadastrarCandidato(c1);
-                        } else if (cargo.equalsIgnoreCase("Senador")){
-                            System.out.println("Digite o suplente 1 do candidato: ");
-                            String sup1 = scan.next();
-                            System.out.println("Digite o suplente 2 do candidato: ");
-                            String sup2 = scan.next();
-                            Candidato c1 = new Senador(nome, cargo, partido, numero, sup1, sup2);
-                            sistema.cadastrarCandidato(c1);
-                        } else if (cargo.equalsIgnoreCase("DeputadoFederal")){
-                            Candidato c1 = new DeputadoFederal(nome, cargo, partido, numero);
-                            sistema.cadastrarCandidato(c1);
-                        } else if (cargo.equalsIgnoreCase("DeputadoEstadual")){
-                            Candidato c1 = new DeputadoEstadual(nome, cargo, partido, numero);
-                            sistema.cadastrarCandidato(c1);
-                        } else {
-                            System.out.println("Cargo inválido.");
-                        }
-
-                    } catch (NumberFormatException e) {
-                        System.out.println("Número inválido.");
-                    } catch (IllegalArgumentException e) {
-                        System.out.println("Erro ao cadastrar candidato: " + e.getMessage());
-                    } finally {
-                        System.out.println("FIM");
-                    }
-                    break;
-                case 2:
-                    int i = 0;
-                    int num = 0;
-                    Candidato cand = null;
-                    boolean confirma = false;
-                    int confirmar = 0;
-                    do {
-                        while (i < 5) {
-                            do {
-                                System.out.println("DEPUTADO FEDERAL");
-                                System.out.println("[0] - Voto nulo");
-                                System.out.println("[1] - Voto em branco");
-                                System.out.println("Digite o número do candidato [][][][]: ");
-                                num = scan.nextInt();
-                                if (num != 0 && num != 1) {
-                                    if (sistema.buscarCandidato(num) != null) {
-                                        cand = sistema.buscarCandidato(num);
-                                        System.out.println("---------------------------------------");
-                                        System.out.println(cand.toString());
-                                        System.out.println("---------------------------------------");
-                                        System.out.println("[1] - Confirmar");
-                                        System.out.println("[2] - Limpar");
-                                        confirmar = scan.nextInt();
-                                        if (confirmar == 1) {
-                                            confirma = cand.adicionarVoto();
-                                            System.out.println("PLIM!");
-                                            i++;
-                                        } else if (confirmar == 2) {
-                                            System.out.println("Voto limpo. Digite novamente.");
-                                            confirma = false;
-                                        } else {
-                                            System.out.println("Opção inválida.");
-                                            confirma = false;
-                                        }
-
-                                    }
-                                } else if (num == 1) {
-                                    sistema.votarBranco();
-                                    confirma = true;
-                                    System.out.println("PLIM!");
-                                    i++;
-
-                                } else if (num == 0) {
-                                    sistema.votarNulo();
-                                    confirma = true;
-                                    System.out.println("PLIM!");
-                                    i++;
-                                }
-                            } while (!confirma);
-
-                            do {
-                                System.out.println("DEPUTADO ESTADUAL");
-                                System.out.println("[0] - Voto nulo");
-                                System.out.println("[1] - Voto em branco");
-                                System.out.println("Digite o número do candidato [][][][][]: ");
-                                num = scan.nextInt();
-                                if (num != 0 && num != 1) {
-                                    if (sistema.buscarCandidato(num) != null) {
-                                        cand = sistema.buscarCandidato(num);
-                                        System.out.println("---------------------------------------");
-                                        System.out.println(cand.toString());
-                                        System.out.println("---------------------------------------");
-                                        System.out.println("[1] - Confirmar");
-                                        System.out.println("[2] - Limpar");
-                                        confirmar = scan.nextInt();
-                                        if (confirmar == 1) {
-                                            confirma = cand.adicionarVoto();
-                                            System.out.println("PLIM!");
-                                            i++;
-                                        } else if (confirmar == 2) {
-                                            System.out.println("Voto limpo. Digite novamente.");
-                                            confirma = false;
-                                        } else {
-                                            System.out.println("Opção inválida.");
-                                            confirma = false;
-                                        }
-                                    }
-                                } else if (num == 1) {
-                                    sistema.votarBranco();
-                                    confirma = true;
-                                    System.out.println("PLIM!");
-                                    i++;
-
-                                } else if (num == 0) {
-                                    sistema.votarNulo();
-                                    confirma = true;
-                                    System.out.println("PLIM!");
-                                    i++;
-                                }
-                            } while (!confirma);
-
-                            do {
-                                System.out.println("SENADOR");
-                                System.out.println("[0] - Voto nulo");
-                                System.out.println("[1] - Voto em branco");
-                                System.out.println("Digite o número do candidato [][][]: ");
-                                num = scan.nextInt();
-                                if (num != 0 && num != 1) {
-                                    if (sistema.buscarCandidato(num) != null) {
-                                        cand = sistema.buscarCandidato(num);
-                                        System.out.println("---------------------------------------");
-                                        System.out.println(cand.toString());
-                                        System.out.println("---------------------------------------");
-                                        System.out.println("[1] - Confirmar");
-                                        System.out.println("[2] - Limpar");
-                                        confirmar = scan.nextInt();
-                                        if (confirmar == 1) {
-                                            confirma = cand.adicionarVoto();
-                                            System.out.println("PLIM!");
-                                            i++;
-                                        } else if (confirmar == 2) {
-                                            System.out.println("Voto limpo. Digite novamente.");
-                                            confirma = false;
-                                        } else {
-                                            System.out.println("Opção inválida.");
-                                            confirma = false;
-                                        }
-                                    }
-                                } else if (num == 1) {
-                                    sistema.votarBranco();
-                                    confirma = true;
-                                    System.out.println("PLIM!");
-                                    i++;
-
-                                } else if (num == 0) {
-                                    sistema.votarNulo();
-                                    confirma = true;
-                                    System.out.println("PLIM!");
-                                    i++;
-                                }
-                            } while (!confirma);
-
-                            do {
-                                System.out.println("GOVERNADOR");
-                                System.out.println("[0] - Voto nulo");
-                                System.out.println("[1] - Voto em branco");
-                                System.out.println("Digite o número do candidato [][]: ");
-                                num = scan.nextInt();
-                                if (num != 0 && num != 1) {
-                                    if (sistema.buscarCandidato(num) != null) {
-                                        cand = sistema.buscarCandidato(num);
-                                        System.out.println("---------------------------------------");
-                                        System.out.println(cand.toString());
-                                        System.out.println("---------------------------------------");
-                                        System.out.println("[1] - Confirmar");
-                                        System.out.println("[2] - Limpar");
-                                        confirmar = scan.nextInt();
-                                        if (confirmar == 1) {
-                                            confirma = cand.adicionarVoto();
-                                            System.out.println("PLIM!");
-                                            i++;
-                                        } else if (confirmar == 2) {
-                                            System.out.println("Voto limpo. Digite novamente.");
-                                            confirma = false;
-                                        } else {
-                                            System.out.println("Opção inválida.");
-                                            confirma = false;
-                                        }
-                                    }
-                                } else if (num == 1) {
-                                    sistema.votarBranco();
-                                    confirma = true;
-                                    System.out.println("PLIM!");
-                                    i++;
-
-                                } else if (num == 0) {
-                                    sistema.votarNulo();
-                                    confirma = true;
-                                    System.out.println("PLIM!");
-                                    i++;
-                                }
-                            } while (!confirma);
-
-                            do {
-                                System.out.println("PRESIDENTE");
-                                System.out.println("[0] - Voto nulo");
-                                System.out.println("[1] - Voto em branco");
-                                System.out.println("Digite o número do candidato [][]: ");
-                                num = scan.nextInt();
-                                if (num != 0 && num != 1) {
-                                    if (sistema.buscarCandidato(num) != null) {
-                                        cand = sistema.buscarCandidato(num);
-                                        System.out.println("---------------------------------------");
-                                        System.out.println(cand.toString());
-                                        System.out.println("---------------------------------------");
-                                        System.out.println("[1] - Confirmar");
-                                        System.out.println("[2] - Limpar");
-                                        confirmar = scan.nextInt();
-                                        if (confirmar == 1) {
-                                            confirma = cand.adicionarVoto();
-                                            System.out.println("PLIM!");
-                                            i++;
-                                        } else if (confirmar == 2) {
-                                            System.out.println("Voto limpo. Digite novamente.");
-                                            confirma = false;
-                                        } else {
-                                            System.out.println("Opção inválida.");
-                                            confirma = false;
-                                        }
-                                    }
-                                } else if (num == 1) {
-                                    sistema.votarBranco();
-                                    confirma = true;
-                                    System.out.println("PLIM!");
-                                    i++;
-
-                                } else if (num == 0) {
-                                    sistema.votarNulo();
-                                    confirma = true;
-                                    System.out.println("PLIM!");
-                                    i++;
-                                }
-                            } while (!confirma);
-                        }
-                        System.out.println("Deseja finalizar a votação? [1] - Sim | [2] - Não");
-                        int finalizar = scan.nextInt();
-                        if (finalizar == 1) {
-                            System.out.println("Digite a senha para finalizar a votação:");
-                            int senha = scan.nextInt();
-                            if (senha == sistema.getSenha()) {
-                                finalizarVotacao = true;
-                                sistema.organizar();
-                                sistema.exibirResultados();
-                            } else {
-                                System.out.println("Senha incorreta.");
-                            }
-                        } else if (finalizar == 2) {
-                            finalizarVotacao = false;
-                            i = 0;
+                        } else if (confirmar == 2) {
+                            System.out.println("Voto limpo. Digite novamente.");
+                            confirma = false;
                         } else {
                             System.out.println("Opção inválida.");
+                            confirma = false;
                         }
-                    } while (!finalizarVotacao);
-                    System.out.println("Desligando urna...");
-                    break;
-                case 0:
-                    System.out.println("Desligando urna...");
-                    break;
-                default:
-                    System.out.println("Opção inválida. Tente novamente.");
+
+                    }
+                } else if (num == 1) {
+                    sistema.votarBranco();
+                    confirma = true;
+                    System.out.println("PLIM!");
+
+                } else if (num == 0) {
+                    sistema.votarNulo();
+                    confirma = true;
+                    System.out.println("PLIM!");
+
+                }
+            } while (!confirma);
+
+            do {
+                System.out.println("DEPUTADO ESTADUAL");
+                System.out.println("[0] - Voto nulo");
+                System.out.println("[1] - Voto em branco");
+                System.out.println("Digite o número do candidato [][][][][]: ");
+                num = scan.nextInt();
+                if (num != 0 && num != 1) {
+                    if (sistema.buscarCandidato(num, "DeputadoEstadual") != null) {
+                        cand = sistema.buscarCandidato(num, "DeputadoEstadual");
+                        System.out.println("---------------------------------------");
+                        System.out.println(cand.toString());
+                        System.out.println("---------------------------------------");
+                        System.out.println("[1] - Confirmar");
+                        System.out.println("[2] - Limpar");
+                        confirmar = scan.nextInt();
+                        if (confirmar == 1) {
+                            confirma = cand.adicionarVoto();
+                            System.out.println("PLIM!");
+
+                        } else if (confirmar == 2) {
+                            System.out.println("Voto limpo. Digite novamente.");
+                            confirma = false;
+                        } else {
+                            System.out.println("Opção inválida.");
+                            confirma = false;
+                        }
+                    }
+                } else if (num == 1) {
+                    sistema.votarBranco();
+                    confirma = true;
+                    System.out.println("PLIM!");
+
+                } else if (num == 0) {
+                    sistema.votarNulo();
+                    confirma = true;
+                    System.out.println("PLIM!");
+
+                }
+            } while (!confirma);
+
+            do {
+                System.out.println("SENADOR");
+                System.out.println("[0] - Voto nulo");
+                System.out.println("[1] - Voto em branco");
+                System.out.println("Digite o número do candidato [][][]: ");
+                num = scan.nextInt();
+                if (num != 0 && num != 1) {
+                    if (sistema.buscarCandidato(num, "Senador") != null) {
+                        cand = sistema.buscarCandidato(num, "Senador");
+                        System.out.println("---------------------------------------");
+                        System.out.println(cand.toString());
+                        System.out.println("---------------------------------------");
+                        System.out.println("[1] - Confirmar");
+                        System.out.println("[2] - Limpar");
+                        confirmar = scan.nextInt();
+                        if (confirmar == 1) {
+                            confirma = cand.adicionarVoto();
+                            System.out.println("PLIM!");
+
+                        } else if (confirmar == 2) {
+                            System.out.println("Voto limpo. Digite novamente.");
+                            confirma = false;
+                        } else {
+                            System.out.println("Opção inválida.");
+                            confirma = false;
+                        }
+                    }
+                } else if (num == 1) {
+                    sistema.votarBranco();
+                    confirma = true;
+                    System.out.println("PLIM!");
+
+                } else if (num == 0) {
+                    sistema.votarNulo();
+                    confirma = true;
+                    System.out.println("PLIM!");
+
+                }
+            } while (!confirma);
+
+            do {
+                System.out.println("GOVERNADOR");
+                System.out.println("[0] - Voto nulo");
+                System.out.println("[1] - Voto em branco");
+                System.out.println("Digite o número do candidato [][]: ");
+                num = scan.nextInt();
+                if (num != 0 && num != 1) {
+                    if (sistema.buscarCandidato(num, "Governador") != null) {
+                        cand = sistema.buscarCandidato(num, "Governador");
+                        System.out.println("---------------------------------------");
+                        System.out.println(cand.toString());
+                        System.out.println("---------------------------------------");
+                        System.out.println("[1] - Confirmar");
+                        System.out.println("[2] - Limpar");
+                        confirmar = scan.nextInt();
+                        if (confirmar == 1) {
+                            confirma = cand.adicionarVoto();
+                            System.out.println("PLIM!");
+
+                        } else if (confirmar == 2) {
+                            System.out.println("Voto limpo. Digite novamente.");
+                            confirma = false;
+                        } else {
+                            System.out.println("Opção inválida.");
+                            confirma = false;
+                        }
+                    }
+                } else if (num == 1) {
+                    sistema.votarBranco();
+                    confirma = true;
+                    System.out.println("PLIM!");
+
+                } else if (num == 0) {
+                    sistema.votarNulo();
+                    confirma = true;
+                    System.out.println("PLIM!");
+
+                }
+            } while (!confirma);
+
+            do {
+                System.out.println("PRESIDENTE");
+                System.out.println("[0] - Voto nulo");
+                System.out.println("[1] - Voto em branco");
+                System.out.println("Digite o número do candidato [][]: ");
+                num = scan.nextInt();
+                if (num != 0 && num != 1) {
+                    if (sistema.buscarCandidato(num, "Presidente") != null) {
+                        cand = sistema.buscarCandidato(num, "Presidente");
+                        System.out.println("---------------------------------------");
+                        System.out.println(cand.toString());
+                        System.out.println("---------------------------------------");
+                        System.out.println("[1] - Confirmar");
+                        System.out.println("[2] - Limpar");
+                        confirmar = scan.nextInt();
+                        if (confirmar == 1) {
+                            confirma = cand.adicionarVoto();
+                            System.out.println("PLIM!");
+
+                        } else if (confirmar == 2) {
+                            System.out.println("Voto limpo. Digite novamente.");
+                            confirma = false;
+                        } else {
+                            System.out.println("Opção inválida.");
+                            confirma = false;
+                        }
+                    }
+                } else if (num == 1) {
+                    sistema.votarBranco();
+                    confirma = true;
+                    System.out.println("PLIM!");
+
+                } else if (num == 0) {
+                    sistema.votarNulo();
+                    confirma = true;
+                    System.out.println("PLIM!");
+
+                }
+            } while (!confirma);
+
+            System.out.println(" ");
+            System.out.println("FIM");
+            System.out.println(" ");
+            System.out.println("Deseja finalizar a votação? [1] - Sim | [2] - Não");
+            int finalizar = scan.nextInt();
+            if (finalizar == 1) {
+                System.out.println("Digite a senha para finalizar a votação:");
+                int senha = scan.nextInt();
+                if (senha == sistema.getSenha()) {
+                    finalizarVotacao = true;
+                    sistema.organizar();
+                    sistema.exibirResultados();
+                } else {
+                    System.out.println("Senha incorreta.");
+                }
+            } else if (finalizar == 2) {
+                finalizarVotacao = false;
+            } else {
+                System.out.println("Opção inválida.");
             }
         } while (!finalizarVotacao);
+        System.out.println("Votação finalizada com sucesso! Desligando urna...");
         scan.close();
+
     }
 
     private static void popular(Sistema sistema) {
@@ -332,7 +260,7 @@ public class App {
 
         // GOVERNADORES
         sistema.cadastrarCandidato(new Governador("Farmador de Aura", "Governador", "AURA", 12, "Brabo do Bairro"));
-        sistema.cadastrarCandidato(new Governador("Rei do Pedágio", "Governador", "PEDAGIO", 23, "Sem Troco"));
+        sistema.cadastrarCandidato(new Governador("Rei do Pedágio", "Governador", "PT", 13, "Sem Troco"));
         sistema.cadastrarCandidato(new Governador("Zé do Asfalto", "Governador", "BURACO", 34, "Mestre da Obra"));
         sistema.cadastrarCandidato(new Governador("Doutor Gambiarra", "Governador", "FIO", 45, "Fita Isolante"));
         sistema.cadastrarCandidato(new Governador("Tio do Churrasco", "Governador", "CARVAO", 56, "Linguiça"));

@@ -25,7 +25,7 @@ public class Senador extends Candidato {
 
     @Override
     public String toString() {
-        return super.toString() + "Suplentes: " + getSuplente1() + " e " + getSuplente2();
+        return super.toString() + "[Suplentes: " + getSuplente1() + " e " + getSuplente2() + "]";
     }
 
 }

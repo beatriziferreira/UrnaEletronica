@@ -15,13 +15,15 @@ public class Presidente extends Candidato {
 
     @Override 
     public String toString(){
-        return super.toString() + "Vice: " + getVice();
+        return super.toString() + " [Vice: " + getVice() + "]";
     }
 
 
     public String getVice() {
         return vice;
     }
+
+
     
     
 }

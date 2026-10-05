@@ -16,6 +16,8 @@ public class Governador extends Candidato {
     
     @Override 
     public String toString(){
-        return super.toString() + "Vice: " + getVice();
+        return super.toString() + " [Vice: " + getVice() + "]";
     }
+
+
 }

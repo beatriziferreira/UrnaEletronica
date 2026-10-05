@@ -16,12 +16,11 @@ public class Sistema {
 
     public void cadastrarCandidato(Candidato candidato) {
         candidatos.add(candidato);
-        System.out.println("Candidato cadastrado com sucesso!");
     }
 
-    public Candidato buscarCandidato(int numero) {
+    public Candidato buscarCandidato(int numero, String cargo) {
         for (Candidato candidato : candidatos) {
-            if (candidato.getNumero() == numero) {
+            if (candidato.getNumero() == numero && candidato.getCargo().equalsIgnoreCase(cargo)) {
                 return candidato;
             }
         }
