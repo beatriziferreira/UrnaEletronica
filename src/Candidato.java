@@ -1,10 +1,10 @@
 import java.util.Random;
 
 public abstract class Candidato {
-    private String nome;
-    private String cargo;
-    private String partido;
-    private int numero;
+    private final String nome;
+    private final String cargo;
+    private final String partido;
+    private final int numero;
     private int votos;
     Random random = new Random();
 
@@ -40,7 +40,6 @@ public abstract class Candidato {
     }
 
     public String getPartido() {
-        partido.toUpperCase();
         return partido;
     }
 

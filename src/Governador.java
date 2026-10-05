@@ -1,6 +1,6 @@
 public class Governador extends Candidato {
 
-    private String vice;
+    private final String vice;
 
     public Governador(String nome, String cargo, String partido, int numero, String vice) {
         super(nome, cargo, partido, numero);

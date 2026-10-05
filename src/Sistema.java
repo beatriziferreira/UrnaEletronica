@@ -1,11 +1,11 @@
 import java.util.ArrayList;
 
 public class Sistema {
-    private ArrayList<Candidato> candidatos = new ArrayList<>();
+    private final ArrayList<Candidato>  candidatos = new ArrayList<>();
     private int votosTotais;
     private int votosNulos;
     private int votosBrancos;
-    private int senha;
+    private final int senha;
 
     public Sistema() {
         this.votosTotais = 0;

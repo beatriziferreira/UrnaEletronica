@@ -1,6 +1,6 @@
 public class Senador extends Candidato {
-    private String suplente1;
-    private String suplente2;
+    private final String suplente1;
+    private final String suplente2;
 
     public Senador(String nome, String cargo, String partido, int numero, String suplente1, String suplente2) {
         super(nome, cargo, partido, numero);

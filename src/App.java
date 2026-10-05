@@ -14,10 +14,10 @@ public class App {
         System.out.println("Versão 1.0.2");
         System.out.println("-----------------------------------");
         do {
-            int num = 0;
-            Candidato cand = null;
+            int num;
+            Candidato cand;
             boolean confirma = false;
-            int confirmar = 0;
+            int confirmar;
             do {
                 System.out.println("ELEIÇÕES 2067 - SANTA CATARINA");
                 System.out.println("-----------------------------------");
@@ -35,16 +35,19 @@ public class App {
                         System.out.println("[1] - Confirmar");
                         System.out.println("[2] - Limpar");
                         confirmar = scan.nextInt();
-                        if (confirmar == 1) {
-                            confirma = cand.adicionarVoto();
-                            System.out.println("PLIM!");
-
-                        } else if (confirmar == 2) {
-                            System.out.println("Voto limpo. Digite novamente.");
-                            confirma = false;
-                        } else {
-                            System.out.println("Opção inválida.");
-                            confirma = false;
+                        switch (confirmar) {
+                            case 1:
+                                confirma = cand.adicionarVoto();
+                                System.out.println("PLIM!");
+                                break;
+                            case 2:
+                                System.out.println("Voto limpo. Digite novamente.");
+                                confirma = false;
+                                break;
+                            default:
+                                System.out.println("Opção inválida.");
+                                confirma = false;
+                                break;
                         }
 
                     } else {
@@ -78,16 +81,19 @@ public class App {
                         System.out.println("[1] - Confirmar");
                         System.out.println("[2] - Limpar");
                         confirmar = scan.nextInt();
-                        if (confirmar == 1) {
-                            confirma = cand.adicionarVoto();
-                            System.out.println("PLIM!");
-
-                        } else if (confirmar == 2) {
-                            System.out.println("Voto limpo. Digite novamente.");
-                            confirma = false;
-                        } else {
-                            System.out.println("Opção inválida.");
-                            confirma = false;
+                        switch (confirmar) {
+                            case 1:
+                                confirma = cand.adicionarVoto();
+                                System.out.println("PLIM!");
+                                break;
+                            case 2:
+                                System.out.println("Voto limpo. Digite novamente.");
+                                confirma = false;
+                                break;
+                            default:
+                                System.out.println("Opção inválida.");
+                                confirma = false;
+                                break;
                         }
                     } else {
                         confirma = false;
@@ -120,16 +126,19 @@ public class App {
                         System.out.println("[1] - Confirmar");
                         System.out.println("[2] - Limpar");
                         confirmar = scan.nextInt();
-                        if (confirmar == 1) {
-                            confirma = cand.adicionarVoto();
-                            System.out.println("PLIM!");
-
-                        } else if (confirmar == 2) {
-                            System.out.println("Voto limpo. Digite novamente.");
-                            confirma = false;
-                        } else {
-                            System.out.println("Opção inválida.");
-                            confirma = false;
+                        switch (confirmar) {
+                            case 1:
+                                confirma = cand.adicionarVoto();
+                                System.out.println("PLIM!");
+                                break;
+                            case 2:
+                                System.out.println("Voto limpo. Digite novamente.");
+                                confirma = false;
+                                break;
+                            default:
+                                System.out.println("Opção inválida.");
+                                confirma = false;
+                                break;
                         }
                     }else {
                         confirma = false;
@@ -162,16 +171,19 @@ public class App {
                         System.out.println("[1] - Confirmar");
                         System.out.println("[2] - Limpar");
                         confirmar = scan.nextInt();
-                        if (confirmar == 1) {
-                            confirma = cand.adicionarVoto();
-                            System.out.println("PLIM!");
-
-                        } else if (confirmar == 2) {
-                            System.out.println("Voto limpo. Digite novamente.");
-                            confirma = false;
-                        } else {
-                            System.out.println("Opção inválida.");
-                            confirma = false;
+                        switch (confirmar) {
+                            case 1:
+                                confirma = cand.adicionarVoto();
+                                System.out.println("PLIM!");
+                                break;
+                            case 2:
+                                System.out.println("Voto limpo. Digite novamente.");
+                                confirma = false;
+                                break;
+                            default:
+                                System.out.println("Opção inválida.");
+                                confirma = false;
+                                break;
                         }
                     } else {
                         confirma = false;
@@ -204,16 +216,19 @@ public class App {
                         System.out.println("[1] - Confirmar");
                         System.out.println("[2] - Limpar");
                         confirmar = scan.nextInt();
-                        if (confirmar == 1) {
-                            confirma = cand.adicionarVoto();
-                            System.out.println("PLIM!");
-
-                        } else if (confirmar == 2) {
-                            System.out.println("Voto limpo. Digite novamente.");
-                            confirma = false;
-                        } else {
-                            System.out.println("Opção inválida.");
-                            confirma = false;
+                        switch (confirmar) {
+                            case 1:
+                                confirma = cand.adicionarVoto();
+                                System.out.println("PLIM!");
+                                break;
+                            case 2:
+                                System.out.println("Voto limpo. Digite novamente.");
+                                confirma = false;
+                                break;
+                            default:
+                                System.out.println("Opção inválida.");
+                                confirma = false;
+                                break;
                         }
                     } else {
                         confirma = false;
@@ -236,20 +251,23 @@ public class App {
             System.out.println(" ");
             System.out.println("(Mesário) Deseja finalizar a votação? [1] - Sim | [2] - Não");
             int finalizar = scan.nextInt();
-            if (finalizar == 1) {
-                System.out.println("Digite a senha para finalizar a votação:");
-                int senha = scan.nextInt();
-                if (senha == sistema.getSenha()) {
-                    finalizarVotacao = true;
-                    sistema.exibirResultados();
-                } else {
-                    System.out.println("Senha incorreta.");
+            switch (finalizar) {
+                case 1:
+                    System.out.println("Digite a senha para finalizar a votação:");
+                    int senha = scan.nextInt();
+                    if (senha == sistema.getSenha()) {
+                        finalizarVotacao = true;
+                        sistema.exibirResultados();
+                    } else {
+                        System.out.println("Senha incorreta.");
+                        finalizarVotacao = false;
+                    }   break;
+                case 2:
                     finalizarVotacao = false;
-                }
-            } else if (finalizar == 2) {
-                finalizarVotacao = false;
-            } else {
-                System.out.println("Opção inválida.");
+                    break;
+                default:
+                    System.out.println("Opção inválida.");
+                    break;
             }
         } while (!finalizarVotacao);
         System.out.println("Votação finalizada com sucesso! Desligando urna...");
@@ -288,7 +306,7 @@ public class App {
         // ==================== SENADORES ====================
 
         sistema.cadastrarCandidato(new Senador("Lobao", "Senador", "PUC", 100, "Lobinho Um", "Lobinho Dois"));
-        sistema.cadastrarCandidato(new Senador("Rei do Tererê", "Senador", "PIZZA", 200, "Canudo", "Erva Mate"));
+        sistema.cadastrarCandidato(new Senador("Rei do Tererê", "Senador", "PIZZA", 201, "Canudo", "Erva Mate"));
         sistema.cadastrarCandidato(new Senador("Zé do Boteco", "Senador", "ZAP", 300, "Coxinha", "Pastelzinho"));
         sistema.cadastrarCandidato(new Senador("Dona do Grupo", "Senador", "GAMBI", 400, "Silenciado", "Removido"));
         sistema.cadastrarCandidato(new Senador("Mestre do Discord", "Senador", "EXCEL", 500, "Mute", "Ban"));
@@ -296,7 +314,7 @@ public class App {
         sistema.cadastrarCandidato(new Senador("Tio do Pavê", "Senador", "BAR", 700, "Pave", "Pra Comer"));
         sistema.cadastrarCandidato(new Senador("Fiscal do Churrasco", "Senador", "PUC", 100, "Faca", "Garfo"));
         sistema.cadastrarCandidato(new Senador("Doutor do Zap", "Senador", "PIZZA", 200, "Bom Dia", "Boa Noite"));
-        sistema.cadastrarCandidato(new Senador("Mãe do Pix", "Senador", "ZAP", 300, "TED", "DOC"));
+        sistema.cadastrarCandidato(new Senador("Mãe do Pix", "Senador", "ZAP", 301, "TED", "DOC"));
 
         // ==================== DEPUTADOS FEDERAIS ====================
 
