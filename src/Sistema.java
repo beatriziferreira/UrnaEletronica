@@ -14,9 +14,9 @@ public class Sistema {
         this.senha = 1234;
     }
 
-    public void cadastrarCandidato(String nome, String cargo, String partido, int numero) {
-        Candidato candidato = new Candidato(nome, cargo, partido, numero);
+    public void cadastrarCandidato(Candidato candidato) {
         candidatos.add(candidato);
+        System.out.println("Candidato cadastrado com sucesso!");
     }
 
     public Candidato buscarCandidato(int numero) {
@@ -72,7 +72,9 @@ public class Sistema {
     }
 
     public void exibirResultados() {
-        System.out.println("Resultados da eleição:");
+        System.out.println("-----------------------");
+        System.out.println("-RESULTADOS DA ELEIÇÃO-");
+        System.out.println("-----------------------");
         for (Candidato candidato : candidatos) {
             System.out.println(candidato.toString() + ": " + (candidato.getVotos() / (double) getVotosTotais() * 100) + "% [" + candidato.getVotos() + "]");
         }

@@ -1,4 +1,4 @@
-public class Candidato {
+public abstract class Candidato {
     private String nome;
     private String cargo;
     private String partido;
@@ -25,6 +25,7 @@ public class Candidato {
         if (partido == null || partido.isEmpty()) {
             throw new IllegalArgumentException("Partido do candidato não pode ser nulo ou vazio.");
         }
+        
         
     }
 
@@ -57,12 +58,14 @@ public class Candidato {
 
     @Override 
     public String toString(){
-        return "[" + numero + "] " + cargo + " " + nome + " - " + partido.toUpperCase();
+        return "[" + numero + "] " + nome + " - " + partido.toUpperCase();
     }
 
     public double getPercentualVotosCandidatos() {
         return percentualVotosCandidatos;
     }
+
+    
 
     
 
