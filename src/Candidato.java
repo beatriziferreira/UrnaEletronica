@@ -1,17 +1,20 @@
+import java.util.Random;
+
 public abstract class Candidato {
     private String nome;
     private String cargo;
     private String partido;
     private int numero;
     private int votos;
-    private double percentualVotosCandidatos;
+    Random random = new Random();
 
     public Candidato(String nome, String cargo, String partido, int numero) {
         this.nome = nome;
         this.cargo = cargo;
         this.partido = partido;
         this.numero = numero;
-        this.votos = 0;
+        this.votos = random.nextInt(99001) + 1000;
+        
 
         if (numero < 0) {
             throw new IllegalArgumentException("Número do candidato não pode ser negativo.");
@@ -25,8 +28,7 @@ public abstract class Candidato {
         if (partido == null || partido.isEmpty()) {
             throw new IllegalArgumentException("Partido do candidato não pode ser nulo ou vazio.");
         }
-        
-        
+
     }
 
     public String getNome() {
@@ -50,25 +52,15 @@ public abstract class Candidato {
         return votos;
     }
 
-    public boolean adicionarVoto(){
+    public boolean adicionarVoto() {
         votos++;
         return true;
     }
-    
 
-    @Override 
-    public String toString(){
+    @Override
+    public String toString() {
         return "[" + numero + "] " + nome + " - " + partido.toUpperCase();
     }
 
-    public double getPercentualVotosCandidatos() {
-        return percentualVotosCandidatos;
-    }
 
-    
-
-    
-
-    
-    
 }

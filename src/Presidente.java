@@ -23,6 +23,8 @@ public class Presidente extends Candidato {
         return vice;
     }
 
+    
+
 
     
     

@@ -19,6 +19,8 @@ public class App {
             boolean confirma = false;
             int confirmar = 0;
             do {
+                System.out.println("ELEIÇÕES 2067 - SANTA CATARINA");
+                System.out.println("-----------------------------------");
                 System.out.println("DEPUTADO FEDERAL");
                 System.out.println("[0] - Voto nulo");
                 System.out.println("[1] - Voto em branco");
@@ -26,7 +28,7 @@ public class App {
                 num = scan.nextInt();
                 if (num != 0 && num != 1) {
                     if (sistema.buscarCandidato(num, "DeputadoFederal") != null) {
-                        cand = sistema.buscarCandidato(num,"DeputadoFederal");
+                        cand = sistema.buscarCandidato(num, "DeputadoFederal");
                         System.out.println("---------------------------------------");
                         System.out.println(cand.toString());
                         System.out.println("---------------------------------------");
@@ -45,6 +47,8 @@ public class App {
                             confirma = false;
                         }
 
+                    } else {
+                        confirma = false;
                     }
                 } else if (num == 1) {
                     sistema.votarBranco();
@@ -85,6 +89,8 @@ public class App {
                             System.out.println("Opção inválida.");
                             confirma = false;
                         }
+                    } else {
+                        confirma = false;
                     }
                 } else if (num == 1) {
                     sistema.votarBranco();
@@ -125,6 +131,8 @@ public class App {
                             System.out.println("Opção inválida.");
                             confirma = false;
                         }
+                    }else {
+                        confirma = false;
                     }
                 } else if (num == 1) {
                     sistema.votarBranco();
@@ -165,6 +173,8 @@ public class App {
                             System.out.println("Opção inválida.");
                             confirma = false;
                         }
+                    } else {
+                        confirma = false;
                     }
                 } else if (num == 1) {
                     sistema.votarBranco();
@@ -205,6 +215,8 @@ public class App {
                             System.out.println("Opção inválida.");
                             confirma = false;
                         }
+                    } else {
+                        confirma = false;
                     }
                 } else if (num == 1) {
                     sistema.votarBranco();
@@ -222,17 +234,17 @@ public class App {
             System.out.println(" ");
             System.out.println("FIM");
             System.out.println(" ");
-            System.out.println("Deseja finalizar a votação? [1] - Sim | [2] - Não");
+            System.out.println("(Mesário) Deseja finalizar a votação? [1] - Sim | [2] - Não");
             int finalizar = scan.nextInt();
             if (finalizar == 1) {
                 System.out.println("Digite a senha para finalizar a votação:");
                 int senha = scan.nextInt();
                 if (senha == sistema.getSenha()) {
                     finalizarVotacao = true;
-                    sistema.organizar();
                     sistema.exibirResultados();
                 } else {
                     System.out.println("Senha incorreta.");
+                    finalizarVotacao = false;
                 }
             } else if (finalizar == 2) {
                 finalizarVotacao = false;
@@ -246,65 +258,90 @@ public class App {
     }
 
     private static void popular(Sistema sistema) {
-        // PRESIDENTES
-        sistema.cadastrarCandidato(new Presidente("Tranca Rua", "Presidente", "PT", 13, "Tampa Buraco"));
-        sistema.cadastrarCandidato(new Presidente("Zé do WiFi", "Presidente", "PIZZA", 22, "Senha Errada"));
-        sistema.cadastrarCandidato(new Presidente("Tonho do Zap", "Presidente", "ZAP", 33, "Grupo Silenciado"));
-        sistema.cadastrarCandidato(new Presidente("Capitão Miojo", "Presidente", "MAC", 44, "Tempero Pronto"));
-        sistema.cadastrarCandidato(new Presidente("Dona Planilha", "Presidente", "EXCEL", 55, "Ctrl C"));
-        sistema.cadastrarCandidato(new Presidente("Professor Pardal", "Presidente", "GAMBI", 66, "Fio Desencapado"));
-        sistema.cadastrarCandidato(new Presidente("Rei do Pix", "Presidente", "PIX", 77, "QR Code"));
-        sistema.cadastrarCandidato(new Presidente("Seu Madruga", "Presidente", "BAR", 88, "Dona Florinda"));
-        sistema.cadastrarCandidato(new Presidente("Cabo da Internet", "Presidente", "NET", 99, "Roteador"));
-        sistema.cadastrarCandidato(new Presidente("Jair do Pastel", "Presidente", "PASTEL", 11, "Caldo de Cana"));
+        
+        // ==================== PRESIDENTES ====================
 
-        // GOVERNADORES
-        sistema.cadastrarCandidato(new Governador("Farmador de Aura", "Governador", "AURA", 12, "Brabo do Bairro"));
-        sistema.cadastrarCandidato(new Governador("Rei do Pedágio", "Governador", "PT", 13, "Sem Troco"));
-        sistema.cadastrarCandidato(new Governador("Zé do Asfalto", "Governador", "BURACO", 34, "Mestre da Obra"));
-        sistema.cadastrarCandidato(new Governador("Doutor Gambiarra", "Governador", "FIO", 45, "Fita Isolante"));
-        sistema.cadastrarCandidato(new Governador("Tio do Churrasco", "Governador", "CARVAO", 56, "Linguiça"));
-        sistema.cadastrarCandidato(new Governador("Influencer do Bairro", "Governador", "LIKE", 67, "Seguidor Fiel"));
-        sistema.cadastrarCandidato(new Governador("Mestre do Café", "Governador", "CAFE", 78, "Pao de Queijo"));
-        sistema.cadastrarCandidato(new Governador("Professor de Educação Física", "Governador", "FIT", 89, "Personal Treino"));
-        sistema.cadastrarCandidato(new Governador("Fiscal do Sono", "Governador", "ZZZ", 90, "Travesseiro"));
-        sistema.cadastrarCandidato(new Governador("Senhor Estaciona Aqui", "Governador", "VAGA", 21, "Pisca Alerta"));
+        sistema.cadastrarCandidato(new Presidente("Tranca Rua", "Presidente", "PUC", 10, "Exu Mirim"));
+        sistema.cadastrarCandidato(new Presidente("Zé do WiFi", "Presidente", "PIZZA", 20, "Senha Errada"));
+        sistema.cadastrarCandidato(new Presidente("Tonho do Zap", "Presidente", "ZAP", 30, "Grupo Silenciado"));
+        sistema.cadastrarCandidato(new Presidente("Capitão Miojo", "Presidente", "GAMBI", 40, "Tempero Pronto"));
+        sistema.cadastrarCandidato(new Presidente("Dona Planilha", "Presidente", "EXCEL", 50, "Ctrl C"));
+        sistema.cadastrarCandidato(new Presidente("Professor Pardal", "Presidente", "PIX", 60, "Fio Desencapado"));
+        sistema.cadastrarCandidato(new Presidente("Rei do Pix", "Presidente", "BAR", 70, "QR Code"));
+        sistema.cadastrarCandidato(new Presidente("Seu Madruga", "Presidente", "PUC", 10, "Dona Florinda"));
+        sistema.cadastrarCandidato(new Presidente("Cabo da Internet", "Presidente", "PIZZA", 20, "Roteador"));
+        sistema.cadastrarCandidato(new Presidente("Jair do Pastel", "Presidente", "ZAP", 30, "Caldo de Cana"));
 
-        // SENADORES
-        sistema.cadastrarCandidato(new Senador("Lobao", "Senador", "UIVO", 101, "Lobinho Um", "Lobinho Dois"));
-        sistema.cadastrarCandidato(new Senador("Rei do Tererê", "Senador", "GELA", 202, "Canudo", "Erva Mate"));
-        sistema.cadastrarCandidato(new Senador("Zé do Boteco", "Senador", "PETISCO", 303, "Coxinha", "Pastelzinho"));
-        sistema.cadastrarCandidato(new Senador("Dona do Grupo", "Senador", "ADM", 404, "Silenciado", "Removido"));
-        sistema.cadastrarCandidato(new Senador("Mestre do Discord", "Senador", "VOICE", 505, "Mute", "Ban"));
-        sistema.cadastrarCandidato(new Senador("Rei da Soneca", "Senador", "SONO", 606, "Cobertor", "Travesseiro"));
-        sistema.cadastrarCandidato(new Senador("Tio do Pavê", "Senador", "PAVE", 707, "Pave", "Pra Comer"));
-        sistema.cadastrarCandidato(new Senador("Fiscal do Churrasco", "Senador", "CARNE", 808, "Faca", "Garfo"));
-        sistema.cadastrarCandidato(new Senador("Doutor do Zap", "Senador", "FAKE", 909, "Bom Dia", "Boa Noite"));
-        sistema.cadastrarCandidato(new Senador("Mãe do Pix", "Senador", "PIX", 110, "TED", "DOC"));
+        // ==================== GOVERNADORES ====================
 
-        // DEPUTADOS FEDERAIS
-        sistema.cadastrarCandidato(new DeputadoFederal("Ctrl C", "DeputadoFederal", "COPIA", 1001));
-        sistema.cadastrarCandidato(new DeputadoFederal("Ctrl V", "DeputadoFederal", "COLA", 2002));
-        sistema.cadastrarCandidato(new DeputadoFederal("Zé do Mouse", "DeputadoFederal", "CLICK", 3003));
-        sistema.cadastrarCandidato(new DeputadoFederal("Senhor Print", "DeputadoFederal", "SCREEN", 4004));
-        sistema.cadastrarCandidato(new DeputadoFederal("Rei do Alt Tab", "DeputadoFederal", "ALT", 5005));
-        sistema.cadastrarCandidato(new DeputadoFederal("Tio do Pendrive", "DeputadoFederal", "USB", 6006));
-        sistema.cadastrarCandidato(new DeputadoFederal("Doutor Google", "DeputadoFederal", "BUSCA", 7007));
-        sistema.cadastrarCandidato(new DeputadoFederal("Mestre do Bug", "DeputadoFederal", "DEBUG", 8008));
-        sistema.cadastrarCandidato(new DeputadoFederal("Professor Null", "DeputadoFederal", "NULL", 9009));
-        sistema.cadastrarCandidato(new DeputadoFederal("Senhor Sem Sinal", "DeputadoFederal", "WIFI", 1010));
+        sistema.cadastrarCandidato(new Governador("Farmador de Aura", "Governador", "GAMBI", 40, "Brabo do Bairro"));
+        sistema.cadastrarCandidato(new Governador("Rei do Pedágio", "Governador", "PUC", 10, "Sem Troco"));
+        sistema.cadastrarCandidato(new Governador("Zé do Asfalto", "Governador", "PIZZA", 20, "Mestre da Obra"));
+        sistema.cadastrarCandidato(new Governador("Doutor Gambiarra", "Governador", "GAMBI", 40, "Fita Isolante"));
+        sistema.cadastrarCandidato(new Governador("Tio do Churrasco", "Governador", "EXCEL", 50, "Linguiça"));
+        sistema.cadastrarCandidato(new Governador("Influencer do Bairro", "Governador", "PIX", 60, "Seguidor Fiel"));
+        sistema.cadastrarCandidato(new Governador("Mestre do Café", "Governador", "BAR", 70, "Pao de Queijo"));
+        sistema.cadastrarCandidato(new Governador("Professor de Educação Física", "Governador", "PUC", 10, "Personal Treino"));
+        sistema.cadastrarCandidato(new Governador("Fiscal do Sono", "Governador", "ZAP", 30, "Travesseiro"));
+        sistema.cadastrarCandidato(new Governador("Senhor Estaciona Aqui", "Governador", "PIZZA", 20, "Pisca Alerta"));
 
-        // DEPUTADOS ESTADUAIS
-        sistema.cadastrarCandidato(new DeputadoEstadual("Mestre da Gambiarra", "DeputadoEstadual", "GAMBI", 10001));
-        sistema.cadastrarCandidato(new DeputadoEstadual("Zé do Ctrl Z", "DeputadoEstadual", "DESFAZ", 20002));
-        sistema.cadastrarCandidato(new DeputadoEstadual("Dona do Excel", "DeputadoEstadual", "XLS", 30003));
-        sistema.cadastrarCandidato(new DeputadoEstadual("Rei da Senha", "DeputadoEstadual", "12345", 40004));
-        sistema.cadastrarCandidato(new DeputadoEstadual("Tio do Bluetooth", "DeputadoEstadual", "BLU", 50005));
-        sistema.cadastrarCandidato(new DeputadoEstadual("Fiscal do WiFi", "DeputadoEstadual", "NET", 60006));
-        sistema.cadastrarCandidato(new DeputadoEstadual("Doutor em Memes", "DeputadoEstadual", "MEME", 70007));
-        sistema.cadastrarCandidato(new DeputadoEstadual("Professor de Quinta", "DeputadoEstadual", "QUINTA", 80008));
-        sistema.cadastrarCandidato(new DeputadoEstadual("Rei do Cafezinho", "DeputadoEstadual", "CAFE", 90009));
-        sistema.cadastrarCandidato(new DeputadoEstadual("Zé do Delivery", "DeputadoEstadual", "IFOD", 99999));
+        // ==================== SENADORES ====================
 
+        sistema.cadastrarCandidato(new Senador("Lobao", "Senador", "PUC", 100, "Lobinho Um", "Lobinho Dois"));
+        sistema.cadastrarCandidato(new Senador("Rei do Tererê", "Senador", "PIZZA", 200, "Canudo", "Erva Mate"));
+        sistema.cadastrarCandidato(new Senador("Zé do Boteco", "Senador", "ZAP", 300, "Coxinha", "Pastelzinho"));
+        sistema.cadastrarCandidato(new Senador("Dona do Grupo", "Senador", "GAMBI", 400, "Silenciado", "Removido"));
+        sistema.cadastrarCandidato(new Senador("Mestre do Discord", "Senador", "EXCEL", 500, "Mute", "Ban"));
+        sistema.cadastrarCandidato(new Senador("Rei da Soneca", "Senador", "PIX", 600, "Cobertor", "Travesseiro"));
+        sistema.cadastrarCandidato(new Senador("Tio do Pavê", "Senador", "BAR", 700, "Pave", "Pra Comer"));
+        sistema.cadastrarCandidato(new Senador("Fiscal do Churrasco", "Senador", "PUC", 100, "Faca", "Garfo"));
+        sistema.cadastrarCandidato(new Senador("Doutor do Zap", "Senador", "PIZZA", 200, "Bom Dia", "Boa Noite"));
+        sistema.cadastrarCandidato(new Senador("Mãe do Pix", "Senador", "ZAP", 300, "TED", "DOC"));
+
+        // ==================== DEPUTADOS FEDERAIS ====================
+
+        sistema.cadastrarCandidato(new DeputadoFederal("Ctrl C", "DeputadoFederal", "PUC", 1001));
+        sistema.cadastrarCandidato(new DeputadoFederal("Ctrl V", "DeputadoFederal", "PIZZA", 2001));
+        sistema.cadastrarCandidato(new DeputadoFederal("Zé do Mouse", "DeputadoFederal", "ZAP", 3001));
+        sistema.cadastrarCandidato(new DeputadoFederal("Senhor Print", "DeputadoFederal", "GAMBI", 4001));
+        sistema.cadastrarCandidato(new DeputadoFederal("Rei do Alt Tab", "DeputadoFederal", "EXCEL", 5001));
+        sistema.cadastrarCandidato(new DeputadoFederal("Tio do Pendrive", "DeputadoFederal", "PIX", 6001));
+        sistema.cadastrarCandidato(new DeputadoFederal("Doutor Google", "DeputadoFederal", "BAR", 7001));
+        sistema.cadastrarCandidato(new DeputadoFederal("Mestre do Bug", "DeputadoFederal", "PUC", 1002));
+        sistema.cadastrarCandidato(new DeputadoFederal("Professor Null", "DeputadoFederal", "PIZZA", 2002));
+        sistema.cadastrarCandidato(new DeputadoFederal("Senhor Sem Sinal", "DeputadoFederal", "ZAP", 3002));
+        sistema.cadastrarCandidato(new DeputadoFederal("Rei do Ctrl Alt Del", "DeputadoFederal", "GAMBI", 4002));
+        sistema.cadastrarCandidato(new DeputadoFederal("Dona da Impressora", "DeputadoFederal", "EXCEL", 5002));
+        sistema.cadastrarCandidato(new DeputadoFederal("Tio do Cabo HDMI", "DeputadoFederal", "PIX", 6002));
+        sistema.cadastrarCandidato(new DeputadoFederal("Mestre do Bluetooth", "DeputadoFederal", "BAR", 7002));
+        sistema.cadastrarCandidato(new DeputadoFederal("Zé do Download", "DeputadoFederal", "PUC", 1003));
+        sistema.cadastrarCandidato(new DeputadoFederal("Professor do Google", "DeputadoFederal", "PIZZA", 2003));
+        sistema.cadastrarCandidato(new DeputadoFederal("Fiscal do WiFi", "DeputadoFederal", "ZAP", 3003));
+        sistema.cadastrarCandidato(new DeputadoFederal("Doutor do Backup", "DeputadoFederal", "GAMBI", 4003));
+        sistema.cadastrarCandidato(new DeputadoFederal("Senhor Atualização", "DeputadoFederal", "EXCEL", 5003));
+        sistema.cadastrarCandidato(new DeputadoFederal("Rei do Login", "DeputadoFederal", "PIX", 6003));
+
+        // ==================== DEPUTADOS ESTADUAIS ====================
+
+        sistema.cadastrarCandidato(new DeputadoEstadual("Mestre da Gambiarra", "DeputadoEstadual", "PUC", 10001));
+        sistema.cadastrarCandidato(new DeputadoEstadual("Zé do Ctrl Z", "DeputadoEstadual", "PIZZA", 20001));
+        sistema.cadastrarCandidato(new DeputadoEstadual("Dona do Excel", "DeputadoEstadual", "ZAP", 30001));
+        sistema.cadastrarCandidato(new DeputadoEstadual("Rei da Senha", "DeputadoEstadual", "GAMBI", 40001));
+        sistema.cadastrarCandidato(new DeputadoEstadual("Tio do Bluetooth", "DeputadoEstadual", "EXCEL", 50001));
+        sistema.cadastrarCandidato(new DeputadoEstadual("Fiscal do WiFi", "DeputadoEstadual", "PIX", 60001));
+        sistema.cadastrarCandidato(new DeputadoEstadual("Doutor em Memes", "DeputadoEstadual", "BAR", 70001));
+        sistema.cadastrarCandidato(new DeputadoEstadual("Professor de Quinta", "DeputadoEstadual", "PUC", 10002));
+        sistema.cadastrarCandidato(new DeputadoEstadual("Rei do Cafezinho", "DeputadoEstadual", "PIZZA", 20002));
+        sistema.cadastrarCandidato(new DeputadoEstadual("Zé do Delivery", "DeputadoEstadual", "ZAP", 30002));
+        sistema.cadastrarCandidato(new DeputadoEstadual("Tio da Tomada", "DeputadoEstadual", "GAMBI", 40002));
+        sistema.cadastrarCandidato(new DeputadoEstadual("Dona do PowerPoint", "DeputadoEstadual", "EXCEL", 50002));
+        sistema.cadastrarCandidato(new DeputadoEstadual("Rei do Pix Parcelado", "DeputadoEstadual", "PIX", 60002));
+        sistema.cadastrarCandidato(new DeputadoEstadual("Fiscal da Calçada", "DeputadoEstadual", "BAR", 70002));
+        sistema.cadastrarCandidato(new DeputadoEstadual("Mestre do WiFi", "DeputadoEstadual", "PUC", 10003));
+        sistema.cadastrarCandidato(new DeputadoEstadual("Senhor do Cupom", "DeputadoEstadual", "PIZZA", 20003));
+        sistema.cadastrarCandidato(new DeputadoEstadual("Doutor do Zap", "DeputadoEstadual", "ZAP", 30003));
+        sistema.cadastrarCandidato(new DeputadoEstadual("Professor do Estágio", "DeputadoEstadual", "GAMBI", 40003));
+        sistema.cadastrarCandidato(new DeputadoEstadual("Rei do Café Frio", "DeputadoEstadual", "EXCEL", 50003));
+        sistema.cadastrarCandidato(new DeputadoEstadual("Zé do QR Code", "DeputadoEstadual", "PIX", 60003));
     }
 }
