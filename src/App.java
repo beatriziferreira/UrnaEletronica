@@ -140,7 +140,7 @@ public class App {
                                 confirma = false;
                                 break;
                         }
-                    }else {
+                    } else {
                         confirma = false;
                     }
                 } else if (num == 1) {
@@ -249,26 +249,30 @@ public class App {
             System.out.println(" ");
             System.out.println("FIM");
             System.out.println(" ");
-            System.out.println("(Mesário) Deseja finalizar a votação? [1] - Sim | [2] - Não");
-            int finalizar = scan.nextInt();
-            switch (finalizar) {
-                case 1:
-                    System.out.println("Digite a senha para finalizar a votação:");
-                    int senha = scan.nextInt();
-                    if (senha == sistema.getSenha()) {
-                        finalizarVotacao = true;
-                        sistema.exibirResultados();
-                    } else {
-                        System.out.println("Senha incorreta.");
+            int senha = 0;
+            do {
+                System.out.println("(Mesário) Deseja finalizar a votação? [1] - Sim | [2] - Não");
+                int finalizar = scan.nextInt();
+                switch (finalizar) {
+                    case 1:
+                        System.out.println("Digite a senha para finalizar a votação:");
+                        senha = scan.nextInt();
+                        if (senha == sistema.getSenha()) {
+                            finalizarVotacao = true;
+                            sistema.exibirResultados();
+                        } else {
+                            System.out.println("Senha incorreta.");
+                            finalizarVotacao = false;
+                        }
+                        break;
+                    case 2:
                         finalizarVotacao = false;
-                    }   break;
-                case 2:
-                    finalizarVotacao = false;
-                    break;
-                default:
-                    System.out.println("Opção inválida.");
-                    break;
-            }
+                        break;
+                    default:
+                        System.out.println("Opção inválida.");
+                        break;
+                }
+            } while (senha != sistema.getSenha());
         } while (!finalizarVotacao);
         System.out.println("Votação finalizada com sucesso! Desligando urna...");
         scan.close();
@@ -276,7 +280,7 @@ public class App {
     }
 
     private static void popular(Sistema sistema) {
-        
+
         // ==================== PRESIDENTES ====================
 
         sistema.cadastrarCandidato(new Presidente("Tranca Rua", "Presidente", "PUC", 10, "Exu Mirim"));
@@ -299,7 +303,8 @@ public class App {
         sistema.cadastrarCandidato(new Governador("Tio do Churrasco", "Governador", "EXCEL", 50, "Linguiça"));
         sistema.cadastrarCandidato(new Governador("Influencer do Bairro", "Governador", "PIX", 60, "Seguidor Fiel"));
         sistema.cadastrarCandidato(new Governador("Mestre do Café", "Governador", "BAR", 70, "Pao de Queijo"));
-        sistema.cadastrarCandidato(new Governador("Professor de Educação Física", "Governador", "PUC", 10, "Personal Treino"));
+        sistema.cadastrarCandidato(
+                new Governador("Professor de Educação Física", "Governador", "PUC", 10, "Personal Treino"));
         sistema.cadastrarCandidato(new Governador("Fiscal do Sono", "Governador", "ZAP", 30, "Travesseiro"));
         sistema.cadastrarCandidato(new Governador("Senhor Estaciona Aqui", "Governador", "PIZZA", 20, "Pisca Alerta"));
 
@@ -361,5 +366,6 @@ public class App {
         sistema.cadastrarCandidato(new DeputadoEstadual("Professor do Estágio", "DeputadoEstadual", "GAMBI", 40003));
         sistema.cadastrarCandidato(new DeputadoEstadual("Rei do Café Frio", "DeputadoEstadual", "EXCEL", 50003));
         sistema.cadastrarCandidato(new DeputadoEstadual("Zé do QR Code", "DeputadoEstadual", "PIX", 60003));
+
     }
 }

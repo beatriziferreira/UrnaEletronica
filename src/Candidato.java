@@ -51,6 +51,7 @@ public abstract class Candidato {
         return votos;
     }
 
+
     public boolean adicionarVoto() {
         votos++;
         return true;

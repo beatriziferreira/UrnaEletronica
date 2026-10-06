@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 
 public class Sistema {
-    private final ArrayList<Candidato>  candidatos = new ArrayList<>();
+    private final ArrayList<Candidato> candidatos = new ArrayList<>();
     private int votosTotais;
     private int votosNulos;
     private int votosBrancos;
@@ -9,8 +9,8 @@ public class Sistema {
 
     public Sistema() {
         this.votosTotais = 0;
-        this.votosNulos = 0;
-        this.votosBrancos = 0;
+        this.votosNulos = 10000;
+        this.votosBrancos = 9800;
         this.senha = 1234;
     }
 
@@ -52,35 +52,24 @@ public class Sistema {
         return votosBrancos;
     }
 
-    public void organizar(ArrayList<Candidato> lista) {
-        for (int i = 0; i < lista.size() - 1; i++) {
+    public int getSenha() {
+        return senha;
+    }
 
+    public void ordenarPorVotos(ArrayList<Candidato> lista) {
+
+        for (int i = 0; i < lista.size() - 1; i++) {
             for (int j = 0; j < lista.size() - 1 - i; j++) {
 
                 if (lista.get(j).getVotos() < lista.get(j + 1).getVotos()) {
+
                     Candidato aux = lista.get(j);
                     lista.set(j, lista.get(j + 1));
                     lista.set(j + 1, aux);
                 }
             }
         }
-    }
 
-    public int getSenha() {
-        return senha;
-    }
-
-    public ArrayList<Candidato> getCandidatosPorCargo(Class<?> tipoCargo) {
-
-        ArrayList<Candidato> lista = new ArrayList<>();
-
-        for (Candidato candidato : candidatos) {
-            if (tipoCargo.isInstance(candidato)) {
-                lista.add(candidato);
-            }
-        }
-
-        return lista;
     }
 
     public int getVotosTotaisPorCargo(Class<?> tipoCargo) {
@@ -96,11 +85,25 @@ public class Sistema {
         return total;
     }
 
+    // Retorna os candidatos de um determinado cargo
+    public ArrayList<Candidato> getCandidatosPorCargo(Class<?> tipoCargo) {
+
+        ArrayList<Candidato> lista = new ArrayList<>();
+
+        for (Candidato candidato : candidatos) {
+            if (tipoCargo.isInstance(candidato)) {
+                lista.add(candidato);
+            }
+        }
+
+        return lista;
+    }
+
     public void exibirCargo(String nomeCargo, Class<?> tipoCargo, int quantidadeEleitos) {
 
         ArrayList<Candidato> lista = getCandidatosPorCargo(tipoCargo);
 
-        organizar(lista);
+        ordenarPorVotos(lista);
 
         int totalVotos = getVotosTotaisPorCargo(tipoCargo);
 
@@ -181,25 +184,11 @@ public class Sistema {
 
         int total = getVotosTotais();
 
-        double porcentagemNulos = 0;
-        double porcentagemBrancos = 0;
+        System.out.println("Votos Nulos: [" + votosNulos + "]");
 
-        if (total > 0) {
-            porcentagemNulos = (votosNulos / (double) total) * 100;
-
-            porcentagemBrancos = (votosBrancos / (double) total) * 100;
-        }
-
-        System.out.printf(
-                "Votos Nulos: %.2f%% [%d]%n",
-                porcentagemNulos,
-                votosNulos);
-
-        System.out.printf(
-                "Votos Brancos: %.2f%% [%d]%n",
-                porcentagemBrancos,
-                votosBrancos);
+        System.out.println("Votos Brancos: [" + votosBrancos + "]");
 
         System.out.println("Total de Votos: [" + total + "]");
     }
+
 }
