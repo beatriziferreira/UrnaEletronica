@@ -85,7 +85,6 @@ public class Sistema {
         return total;
     }
 
-    // Retorna os candidatos de um determinado cargo
     public ArrayList<Candidato> getCandidatosPorCargo(Class<?> tipoCargo) {
 
         ArrayList<Candidato> lista = new ArrayList<>();
@@ -147,31 +146,26 @@ public class Sistema {
         System.out.println("       RESULTADOS DA ELEIÇÃO");
         System.out.println("----------------------------------------");
 
-        // 1 eleito
         exibirCargo(
                 "PRESIDENTE",
                 Presidente.class,
                 1);
 
-        // 1 eleito
         exibirCargo(
                 "GOVERNADOR (SC)",
                 Governador.class,
                 1);
 
-        // 1 eleito
         exibirCargo(
                 "SENADOR (SC)",
                 Senador.class,
                 1);
 
-        // 8 eleitos
         exibirCargo(
                 "DEPUTADOS ESTADUAIS (SC)",
                 DeputadoEstadual.class,
                 8);
 
-        // 8 eleitos
         exibirCargo(
                 "DEPUTADOS FEDERAIS (SC)",
                 DeputadoFederal.class,
